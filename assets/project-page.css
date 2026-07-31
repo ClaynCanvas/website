@@ -1,0 +1,578 @@
+/* =========================================================
+   PROJECT DETAIL PAGE
+   Clay & Canvas
+   ========================================================= */
+
+/* ---------------- Page base ---------------- */
+
+body {
+    background: #ffffff;
+}
+
+main {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ---------------- Project hero ---------------- */
+
+.project-hero {
+    position: relative;
+    isolation: isolate;
+
+    width: 100%;
+    min-height: 82vh;
+
+    padding:
+        calc(var(--header-height) + 80px)
+        40px
+        70px;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    color: #ffffff;
+    background-color: #1b1b1b;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.project-hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.18) 0%,
+            rgba(0, 0, 0, 0.12) 42%,
+            rgba(0, 0, 0, 0.78) 100%
+        );
+
+    pointer-events: none;
+}
+
+.project-hero-inner {
+    position: relative;
+    z-index: 3;
+
+    width: min(1240px, 100%);
+    margin: 0 auto;
+}
+
+.project-hero h1 {
+    max-width: 1000px;
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(64px, 9vw, 142px);
+    font-weight: 500;
+    line-height: 0.82;
+    letter-spacing: -0.065em;
+}
+
+.project-hero p {
+    margin-top: 26px;
+
+    color: rgba(255, 255, 255, 0.74);
+
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.project-hero .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 30px;
+
+    color: rgba(255, 255, 255, 0.76);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    transition:
+        color 250ms ease,
+        transform 250ms ease;
+}
+
+.project-hero .back-link:hover {
+    color: #ffffff;
+    transform: translateX(-4px);
+}
+
+/* ---------------- Project gallery section ---------------- */
+
+.project-gallery {
+    padding: 86px 40px 100px;
+    background: #ffffff;
+}
+
+.project-gallery-inner {
+    width: min(1240px, 100%);
+    margin: 0 auto;
+}
+
+/* ---------------- Project introduction ---------------- */
+
+.project-intro {
+    display: grid;
+    grid-template-columns:
+        minmax(260px, 0.72fr)
+        minmax(0, 1.28fr);
+
+    gap: clamp(50px, 7vw, 100px);
+    align-items: start;
+
+    margin-bottom: 70px;
+}
+
+.project-intro h2 {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+}
+
+.project-intro p {
+    max-width: 760px;
+    margin: 0;
+
+    color: rgba(23, 23, 23, 0.66);
+
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+/* ---------------- Gallery grid ---------------- */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(12, minmax(0, 1fr));
+
+    grid-auto-flow: dense;
+    gap: 18px;
+}
+
+/*
+ * Fixed aspect ratios prevent the uploaded image
+ * dimensions from changing the gallery layout.
+ */
+
+.gallery-item {
+    position: relative;
+
+    grid-column: span 6;
+
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    border-radius: 4px;
+    background: #ebe8e3;
+}
+
+/* First image */
+
+.gallery-item:nth-child(1) {
+    grid-column: span 8;
+    aspect-ratio: 16 / 10;
+}
+
+/* Second image */
+
+.gallery-item:nth-child(2) {
+    grid-column: span 4;
+    aspect-ratio: 4 / 5;
+}
+
+/* Third image */
+
+.gallery-item:nth-child(3) {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 8;
+}
+
+/* Fourth and fifth */
+
+.gallery-item:nth-child(4),
+.gallery-item:nth-child(5) {
+    grid-column: span 6;
+    aspect-ratio: 4 / 3;
+}
+
+/* Sixth image */
+
+.gallery-item:nth-child(6) {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 8;
+}
+
+/* Remaining gallery images */
+
+.gallery-item:nth-child(n + 7) {
+    grid-column: span 6;
+    aspect-ratio: 4 / 3;
+}
+
+.gallery-item img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+        transform 800ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.025);
+}
+
+/*
+ * Add this class to an individual figure when
+ * you need the complete image visible.
+ *
+ * Example:
+ * <figure class="gallery-item image-contain">
+ */
+
+.gallery-item.image-contain img {
+    object-fit: contain;
+}
+
+.gallery-item.image-contain {
+    background: #eeeae4;
+}
+
+/* Optional image-position controls */
+
+.gallery-item.position-top img {
+    object-position: center top;
+}
+
+.gallery-item.position-bottom img {
+    object-position: center bottom;
+}
+
+.gallery-item.position-left img {
+    object-position: left center;
+}
+
+.gallery-item.position-right img {
+    object-position: right center;
+}
+
+/* ---------------- Previous / Next project ---------------- */
+
+.project-navigation {
+    padding: 12px 40px 90px;
+    background: #ffffff;
+}
+
+.project-navigation-inner {
+    width: min(1240px, 100%);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.project-nav-link {
+    position: relative;
+    isolation: isolate;
+
+    min-height: 190px;
+    padding: 30px 32px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(23, 23, 23, 0.12);
+
+    border-radius: 24px;
+
+    color: #171717;
+    background: #f3f0ec;
+
+    transition:
+        color 350ms ease,
+        transform 350ms ease,
+        border-color 350ms ease,
+        box-shadow 350ms ease;
+}
+
+.project-nav-link::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background: #171717;
+
+    transform: scaleY(0);
+    transform-origin: bottom center;
+
+    transition:
+        transform 480ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-nav-link:hover::before {
+    transform: scaleY(1);
+}
+
+.project-nav-link:hover {
+    color: #ffffff;
+
+    border-color: #171717;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 20px 45px
+        rgba(0, 0, 0, 0.14);
+}
+
+.project-nav-label {
+    color: #b19e8a;
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.project-nav-link strong {
+    max-width: 520px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+}
+
+.project-nav-next {
+    align-items: flex-end;
+    text-align: right;
+}
+
+/* ---------------- Tablet ---------------- */
+
+@media (max-width: 900px) {
+    .project-hero {
+        min-height: 72vh;
+
+        padding:
+            calc(var(--header-height) + 70px)
+            24px
+            55px;
+    }
+
+    .project-hero h1 {
+        font-size: clamp(58px, 12vw, 110px);
+    }
+
+    .project-gallery {
+        padding: 70px 24px 82px;
+    }
+
+    .project-intro {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 52px;
+    }
+
+    .project-intro p {
+        max-width: 100%;
+    }
+
+    .gallery-item,
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(2),
+    .gallery-item:nth-child(3),
+    .gallery-item:nth-child(4),
+    .gallery-item:nth-child(5),
+    .gallery-item:nth-child(6),
+    .gallery-item:nth-child(n + 7) {
+        grid-column: span 6;
+        aspect-ratio: 4 / 3;
+    }
+
+    .gallery-item:nth-child(3),
+    .gallery-item:nth-child(6) {
+        grid-column: 1 / -1;
+        aspect-ratio: 16 / 9;
+    }
+
+    .project-navigation {
+        padding:
+            8px
+            24px
+            72px;
+    }
+
+    .project-nav-link {
+        min-height: 165px;
+        padding: 26px;
+    }
+}
+
+/* ---------------- Mobile ---------------- */
+
+@media (max-width: 620px) {
+    .project-hero {
+        min-height: 68vh;
+
+        padding:
+            calc(var(--header-height) + 40px)
+            18px
+            42px;
+
+        background-position: center;
+    }
+
+    .project-hero h1 {
+        font-size: clamp(48px, 16vw, 78px);
+        line-height: 0.88;
+    }
+
+    .project-hero p {
+        margin-top: 18px;
+        font-size: 10px;
+    }
+
+    .project-gallery {
+        padding: 54px 18px 64px;
+    }
+
+    .project-intro {
+        gap: 24px;
+        margin-bottom: 42px;
+    }
+
+    .project-intro h2 {
+        font-size: clamp(38px, 12vw, 56px);
+    }
+
+    .project-intro p {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .gallery-item,
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(2),
+    .gallery-item:nth-child(3),
+    .gallery-item:nth-child(4),
+    .gallery-item:nth-child(5),
+    .gallery-item:nth-child(6),
+    .gallery-item:nth-child(n + 7) {
+        grid-column: 1;
+        aspect-ratio: 4 / 3;
+    }
+
+    .project-navigation {
+        padding:
+            0
+            18px
+            58px;
+    }
+
+    .project-navigation {
+    padding: 0 40px 60px;
+}
+
+.project-nav-link {
+    min-height: 120px;
+    padding: 22px 26px;
+    border-radius: 18px;
+}
+
+.project-nav-label {
+    font-size: 9px;
+}
+
+.project-nav-link strong {
+    font-size: clamp(26px, 3vw, 42px);
+}
+}
+
+/* ---------------- Motion accessibility ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .gallery-item img,
+    .project-nav-link,
+    .project-nav-link::before,
+    .project-hero .back-link {
+        transition: none;
+    }
+
+    .gallery-item:hover img,
+    .project-nav-link:hover,
+    .project-hero .back-link:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 620px) {
+    .project-nav-link {
+        min-height: 105px;
+        padding: 18px 20px;
+    }
+
+    .project-nav-link strong {
+        font-size: clamp(24px, 9vw, 36px);
+    }
+}
